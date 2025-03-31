@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}My Accounts{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>My Accounts</h2>
+        <a href="{% url 'accounts:account_create' %}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> New Account
+        </a>
+    </div>
+    
+    {% if accounts %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Account No.</th>
+                    <th>Type</th>
+                    <th class="text-end">Balance</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for account in accounts %}
+                <tr>
+                    <td>{{ account.account_id }}</td>
+                    <td>
+                        <span class="badge bg-{% if account.account_type == 'S' %}info{% elif account.account_type == 'C' %}success{% else %}warning{% endif %}">
+                            {{ account.get_account_type_display }}
+                        </span>
+                    </td>
+                    <td class="text-end">${{ account.balance|intcomma }}</td>
+                    <td>
+                        <span class="badge bg-{% if account.is_active %}success{% else %}secondary{% endif %}">
+                            {% if account.is_active %}Active{% else %}Inactive{% endif %}
+                        </span>
+                    </td>
+                    <td class="text-end">
+                        <a href="{% url 'accounts:account_detail' account.account_id %}" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-eye-fill"></i> View
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        You don't have any accounts yet. <a href="{% url 'accounts:account_create' %}" class="alert-link">Open a new account</a>.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

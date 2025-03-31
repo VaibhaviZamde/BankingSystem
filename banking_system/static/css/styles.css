@@ -1,0 +1,43 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.balance-positive {
+    color: #28a745;
+}
+
+.balance-negative {
+    color: #dc3545;
+}
+
+.account-card {
+    transition: transform 0.2s;
+}
+
+.account-card:hover {
+    transform: translateY(-5px);
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
